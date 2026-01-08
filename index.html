@@ -25,52 +25,75 @@
 
     /* Navbar */
     .navbar.bg-dark {
-      background-color: rgba(12,18,32,.86) !important;
+      background-color: rgba(12,18,32,.85) !important;
       backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
 
-    /* Hero */
+    /* FULL SCREEN PARALLAX HERO */
     .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
       color: #fff;
-      background:
-        linear-gradient(rgba(11,18,32,.72), rgba(11,18,32,.88)),
+
+      background-image:
+        linear-gradient(
+          rgba(5, 10, 20, 0.88),
+          rgba(5, 10, 20, 0.96)
+        ),
         url("https://github.com/peninsulastayco/peninsulastayco.github.io/blob/main/images/adffa29f-3055-4531-aef5-6d15dd6db152.png?raw=true");
+
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+
+      /* Parallax */
+      background-attachment: fixed;
+      overflow: hidden;
     }
 
-    .hero-wrap { padding: 3.25rem 0; }
-    @media (min-width: 992px) {
-      .hero-wrap { padding: 5.5rem 0; }
+    /* Mobile fallback (parallax off for performance) */
+    @media (max-width: 768px) {
+      .hero { background-attachment: scroll; }
     }
 
-    .hero-panel {
-      background: rgba(0,0,0,.30);
-      border: 1px solid rgba(255,255,255,.14);
-      border-radius: 16px;
-      box-shadow: 0 14px 32px rgba(0,0,0,.25);
+    /* Fade-in animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero .hero-inner {
+      animation: fadeUp .7s ease-out both;
     }
 
-    /* Trust strip */
-    .trust-strip {
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 14px;
-      padding: .8rem .9rem;
+    /* Hero text styling */
+    .hero h1 {
+      font-size: clamp(2.5rem, 4.9vw, 4.1rem);
+      font-weight: 850;
+      line-height: 1.05;
+      margin-bottom: 0.8rem;
+      color: #ffffff;
+      text-shadow: 0 2px 14px rgba(0,0,0,.55);
+      letter-spacing: -0.02em;
     }
-    .trust-item { 
-      color: rgba(255,255,255,.95); 
-      font-size: .95rem;
-      font-weight: 500;
+
+    .hero h2 {
+      font-size: clamp(1.5rem, 2.7vw, 2.0rem);
+      font-weight: 650;
+      margin-bottom: 1.6rem;
+      color: rgba(255,255,255,.98);
+      text-shadow: 0 2px 12px rgba(0,0,0,.55);
     }
-    .trust-dot {
-      width: 6px; height: 6px;
-      border-radius: 99px;
-      background: rgba(255,255,255,.55);
-      display: inline-block;
-      margin: 0 .55rem;
+
+    .hero p {
+      font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+      max-width: 46rem;
+      color: rgba(255,255,255,.98);
+      text-shadow: 0 2px 12px rgba(0,0,0,.55);
+      margin-bottom: 0;
     }
 
     /* Suburb pills */
@@ -96,7 +119,7 @@
 <body>
 
 <!-- NAV -->
-<nav class="navbar navbar-dark bg-dark sticky-top">
+<nav class="navbar navbar-dark bg-dark fixed-top">
   <div class="container">
     <a class="navbar-brand fw-semibold d-flex align-items-center gap-2" href="#">
       <img class="brand-icon" src="https://raw.githubusercontent.com/peninsulastayco/peninsulastayco.github.io/main/images/22982f39-2c95-412f-81e9-39cc67ec4116.png" alt="Peninsula Stay Co">
@@ -108,42 +131,14 @@
 
 <!-- HERO -->
 <header class="hero">
-  <div class="container hero-wrap">
+  <div class="container hero-inner" style="padding-top: 5.5rem;">
     <div class="row">
-      <div class="col-lg-7">
-        <div class="hero-panel p-4 p-lg-5">
-          <h1 class="fw-bold mb-3" style="line-height:1.1;">
-            <span class="d-block" style="font-size:clamp(2rem,4vw,3.1rem);">
-              Airbnb & Short-Stay Cleaning
-            </span>
-            <span class="text-primary d-block" style="font-size:clamp(1.25rem,2.2vw,1.7rem); margin-top:.35rem;">
-              Mornington Peninsula
-            </span>
-          </h1>
-
-          <p class="lead mb-4" style="color:rgba(255,255,255,.95); max-width:38rem;">
-            Reliable turnovers for holiday rentals — consistent, guest-ready resets with clear communication.
-          </p>
-
-          <!-- SINGLE CTA -->
-          <div class="d-flex gap-2 flex-wrap">
-            <a href="#quote" class="btn btn-primary btn-lg">Request a quote</a>
-          </div>
-
-          <div class="mt-4 trust-strip">
-            <div class="d-flex flex-wrap align-items-center">
-              <div class="trust-item">Fast turnaround (when available)</div>
-              <span class="trust-dot d-none d-sm-inline"></span>
-              <div class="trust-item">Repeatable checklists</div>
-              <span class="trust-dot d-none d-sm-inline"></span>
-              <div class="trust-item">Guest-ready presentation</div>
-            </div>
-          </div>
-
-          <p class="mt-3 mb-0 small" style="color:rgba(255,255,255,.78);">
-            Not affiliated with Airbnb. Servicing short-stay rentals on Airbnb, Stayz, Booking.com and direct bookings.
-          </p>
-        </div>
+      <div class="col-lg-8">
+        <h1>Airbnb & Short-Stay Cleaning</h1>
+        <h2>Mornington Peninsula</h2>
+        <p>
+          Reliable turnovers for holiday rentals — consistent, guest-ready resets with clear communication.
+        </p>
       </div>
     </div>
   </div>
@@ -162,26 +157,40 @@
         <div class="card p-3 h-100">
           <h5>Studio / 1 Bed</h5>
           <p class="display-6 fw-bold">$149</p>
+          <p class="text-muted mb-0">Per turnover</p>
         </div>
       </div>
       <div class="col-md-3">
         <div class="card p-3 h-100 border-primary">
           <h5>2 Bed</h5>
           <p class="display-6 fw-bold">$199</p>
+          <p class="text-muted mb-0">Most popular</p>
         </div>
       </div>
       <div class="col-md-3">
         <div class="card p-3 h-100">
           <h5>3 Bed</h5>
           <p class="display-6 fw-bold">$239</p>
+          <p class="text-muted mb-0">Per turnover</p>
         </div>
       </div>
       <div class="col-md-3">
         <div class="card p-3 h-100">
           <h5>4+ Bed / Luxe</h5>
           <p class="display-6 fw-bold">From $299</p>
+          <p class="text-muted mb-0">Custom checklist</p>
         </div>
       </div>
+    </div>
+
+    <div class="mt-4">
+      <h3 class="h6 fw-semibold">Popular add-ons</h3>
+      <ul class="text-muted mb-0">
+        <li>Linen changeover (using your linen): <strong>$39</strong></li>
+        <li>Restock consumables (using your supplies): <strong>$25</strong></li>
+        <li>Same-day priority (when available): <strong>$25</strong></li>
+        <li>Inspection notes for host (damage / missing items): <strong>Included</strong></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -225,18 +234,21 @@
           <div class="card-body p-3">
             <div class="ratio ratio-16x9 rounded overflow-hidden">
               <iframe
+                title="Mornington Peninsula Map"
                 src="https://www.google.com/maps?q=Mornington+Peninsula+Victoria+Australia&output=embed"
                 loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
                 style="border:0;"
                 allowfullscreen>
               </iframe>
             </div>
-            <div class="map-note mt-2">
-              Map is indicative — availability depends on schedule.
+            <div class="map-note mt-2 px-1">
+              Map is indicative — availability depends on schedule and turnover windows.
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -278,12 +290,12 @@
                 </div>
                 <div class="col-12">
                   <label class="form-label">Message</label>
-                  <textarea class="form-control" name="Message" rows="4"></textarea>
+                  <textarea class="form-control" name="Message" rows="4"
+                    placeholder="Beds/baths, turnovers per week, linen/restock needs, checkout/check-in times…"></textarea>
                 </div>
+
                 <div class="col-12 d-grid">
-                  <button class="btn btn-primary btn-lg" type="submit">
-                    Send quote request
-                  </button>
+                  <button class="btn btn-primary btn-lg" type="submit">Send quote request</button>
                 </div>
               </div>
             </form>
