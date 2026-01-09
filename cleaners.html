@@ -4,15 +4,19 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Cleaner Onboarding | Peninsula Stay Co</title>
+
   <meta name="robots" content="noindex,nofollow" />
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
   <style>
     body { background:#0b1220; }
     .card { border-radius: 16px; }
-    .pill { border:1px solid rgba(0,0,0,.1); border-radius:999px; padding:.25rem .6rem; background:#fff; font-size:.9rem; }
     .muted { color: rgba(0,0,0,.65); }
   </style>
 </head>
+
 <body>
   <div class="container py-5">
     <div class="row justify-content-center">
@@ -26,64 +30,16 @@
         <div class="card shadow-sm mb-4">
           <div class="card-body p-4 p-lg-5">
             <h2 class="h4 fw-bold mb-3">How we work</h2>
-            <p class="muted mb-3">
-              We do short-stay turnovers across the Mornington Peninsula. The standard is simple:
-              <strong>guest-ready, consistent, and on-time</strong>.
+            <p class="muted">
+              Short-stay turnovers across the Mornington Peninsula. Our standard is simple:
+              <strong>guest-ready, consistent, and on-time.</strong>
             </p>
-
-            <div class="d-flex flex-wrap gap-2 mb-3">
-              <span class="pill">Checklists</span>
-              <span class="pill">Photos on completion</span>
-              <span class="pill">Issue reporting</span>
-              <span class="pill">Reliable timing</span>
-            </div>
-
-            <hr class="my-4">
-
-            <h3 class="h5 fw-semibold mb-2">Requirements</h3>
-            <ul class="muted">
-              <li>ABN (preferred) and ability to invoice</li>
-              <li>Public liability insurance (recommended)</li>
-              <li>Own transport (most jobs are not walkable)</li>
-              <li>Smartphone for photos + messaging</li>
-              <li>Police check (or willing to obtain)</li>
-            </ul>
-
-            <h3 class="h5 fw-semibold mt-4 mb-2">Turnover standard (non-negotiables)</h3>
-            <ul class="muted">
-              <li>Arrive on time. Message immediately if delayed.</li>
-              <li>Bathrooms + kitchen reset to “hotel-ready” standard.</li>
-              <li>No hair/dust in corners; mirrors and taps polished.</li>
-              <li>Bins emptied, liners replaced (if provided), smells neutral.</li>
-              <li>Floors vacuumed/mopped appropriately.</li>
-              <li>Quick staging: cushions straight, surfaces tidy, lights as instructed.</li>
-              <li>Completion photos: key areas + any issue close-ups.</li>
-            </ul>
-
-            <h3 class="h5 fw-semibold mt-4 mb-2">Linen & restock</h3>
-            <p class="muted mb-0">
-              Linen/restock is job-specific. If included, you’ll be told in advance and provided clear instructions
-              (where linen is stored, what gets replaced, and quantities).
-            </p>
-
-            <hr class="my-4">
-
-            <h3 class="h5 fw-semibold mb-2">Pay & scheduling</h3>
-            <p class="muted mb-2">
-              We offer jobs based on availability. You can accept/decline — reliability increases your priority for repeat work.
-            </p>
-            <ul class="muted mb-0">
-              <li><strong>Rate:</strong> $___ per turnover (varies by size) + add-ons where applicable</li>
-              <li><strong>Payment terms:</strong> weekly / fortnightly (choose)</li>
-              <li><strong>Communication:</strong> SMS/WhatsApp/Signal (choose)</li>
-            </ul>
           </div>
         </div>
 
-        <div class="card shadow-sm">
+        <div class="card shadow-sm mb-4">
           <div class="card-body p-4 p-lg-5">
             <h2 class="h4 fw-bold mb-3">Apply to join our cleaner list</h2>
-            <p class="muted mb-4">This form is private. We’ll reply by email if we’re a fit.</p>
 
             <form action="https://formspree.io/f/mdakqwpv" method="POST">
               <input type="hidden" name="_subject" value="Cleaner Application - Peninsula Stay Co">
@@ -97,49 +53,30 @@
                   <label class="form-label">Email</label>
                   <input class="form-control" name="Email" type="email" required>
                 </div>
-                <div class="col-md-6">
-                  <label class="form-label">Phone</label>
-                  <input class="form-control" name="Phone" required>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Suburbs you can service</label>
-                  <input class="form-control" name="Service suburbs" placeholder="e.g. Rosebud, Rye, Sorrento">
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label">ABN (if any)</label>
-                  <input class="form-control" name="ABN">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Insurance (yes/no)</label>
-                  <input class="form-control" name="Insurance" placeholder="Yes / No / In progress">
-                </div>
-
-                <div class="col-12">
-                  <label class="form-label">Experience</label>
-                  <textarea class="form-control" name="Experience" rows="4" placeholder="Short-stay, end-of-lease, residential, etc."></textarea>
-                </div>
-
-                <div class="col-12">
-                  <label class="form-label">Availability</label>
-                  <textarea class="form-control" name="Availability" rows="3" placeholder="Days/times you can do turnovers (incl. weekends)"></textarea>
-                </div>
-
                 <div class="col-12 d-grid">
-                  <button class="btn btn-primary btn-lg" type="submit">Submit application</button>
+                  <button class="btn btn-primary btn-lg" type="submit">
+                    Submit application
+                  </button>
                 </div>
               </div>
             </form>
 
-            <p class="muted small mt-3 mb-0">
-              Note: This page is not indexed (noindex) but should still be treated as private. Don’t post it publicly.
+            <!-- Facebook follow (subtle) -->
+            <p class="text-muted small mt-4 mb-0">
+              <i class="fa-brands fa-facebook-f me-1"></i>
+              Follow us on Facebook:
+              <a href="https://www.facebook.com/people/Peninsula-Stay-Co/61586267940303/"
+                 target="_blank"
+                 rel="noopener">
+                Peninsula Stay Co
+              </a>
             </p>
           </div>
         </div>
 
-        <div class="text-center mt-4">
-          <p class="text-white-50 small mb-0">Peninsula Stay Co • Cleaner onboarding</p>
-        </div>
+        <p class="text-white-50 small text-center mb-0">
+          Peninsula Stay Co • Cleaner onboarding
+        </p>
 
       </div>
     </div>
