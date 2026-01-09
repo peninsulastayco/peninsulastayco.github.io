@@ -7,14 +7,11 @@
 
   <meta name="description" content="Airbnb & short-stay cleaning and turnovers across the Mornington Peninsula. Reliable resets, linen changeovers, restocking and guest-ready presentation." />
 
-  <!-- Favicon -->
+  <!-- Favicon / Icons -->
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/peninsulastayco/peninsulastayco.github.io/main/images/22982f39-2c95-412f-81e9-39cc67ec4116.png">
+  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/peninsulastayco/peninsulastayco.github.io/main/images/22982f39-2c95-412f-81e9-39cc67ec4116.png">
 
-  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Font Awesome (Facebook icon) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <style>
     body { scroll-behavior: smooth; }
@@ -30,10 +27,11 @@
     .navbar.bg-dark {
       background-color: rgba(12,18,32,.85) !important;
       backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
 
-    /* ===== HERO ===== */
+    /* ===== HERO (True parallax via JS transform) ===== */
     .hero {
       position: relative;
       min-height: 100vh;
@@ -43,48 +41,63 @@
       overflow: hidden;
     }
 
+    /* Background layer (moved by JS for iPhone-safe parallax) */
     .hero-bg {
       position: absolute;
-      inset: -12vh 0 -12vh 0;
+      inset: -12vh 0 -12vh 0; /* extra height so moving doesn't show edges */
       background-image:
         linear-gradient(rgba(5,10,20,0.90), rgba(5,10,20,0.97)),
         url("https://github.com/peninsulastayco/peninsulastayco.github.io/blob/main/images/adffa29f-3055-4531-aef5-6d15dd6db152.png?raw=true");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      transform: translate3d(0, 0, 0);
       will-change: transform;
     }
 
+    /* Foreground content */
     .hero-content {
       position: relative;
       z-index: 2;
-      padding-top: 5.5rem;
+      padding-top: 5.5rem; /* navbar offset */
+      padding-bottom: 2rem;
     }
 
+    /* Fade-in animation (CSS only) */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-inner { animation: fadeUp .7s ease-out both; }
+
+    /* Hero text styling */
     .hero h1 {
       font-size: clamp(2.5rem, 4.9vw, 4.1rem);
       font-weight: 850;
       line-height: 1.05;
-      margin-bottom: .8rem;
-      text-shadow: 0 2px 14px rgba(0,0,0,.6);
+      margin-bottom: 0.8rem;
+      color: #ffffff;
+      text-shadow: 0 2px 14px rgba(0,0,0,.60);
+      letter-spacing: -0.02em;
     }
 
     .hero h2 {
-      font-size: clamp(1.5rem, 2.7vw, 2rem);
+      font-size: clamp(1.5rem, 2.7vw, 2.0rem);
       font-weight: 650;
       margin-bottom: 1.6rem;
       color: rgba(255,255,255,.98);
-      text-shadow: 0 2px 12px rgba(0,0,0,.6);
+      text-shadow: 0 2px 12px rgba(0,0,0,.60);
     }
 
     .hero p {
-      font-size: 1.15rem;
+      font-size: clamp(1.05rem, 1.3vw, 1.2rem);
       max-width: 46rem;
       color: rgba(255,255,255,.99);
-      text-shadow: 0 2px 12px rgba(0,0,0,.6);
+      text-shadow: 0 2px 12px rgba(0,0,0,.60);
+      margin-bottom: 0;
     }
 
-    /* Suburb pills */
+    /* ===== Suburb pills become buttons + active state ===== */
     .suburb-pill {
       border: 1px solid rgba(0,0,0,.12);
       border-radius: 999px;
@@ -92,7 +105,9 @@
       background: #fff;
       font-size: .92rem;
       cursor: pointer;
+      transition: transform .08s ease, box-shadow .12s ease;
     }
+    .suburb-pill:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,.06); }
     .suburb-pill.active {
       border-color: rgba(13,110,253,.45);
       box-shadow: 0 0 0 3px rgba(13,110,253,.12);
@@ -109,6 +124,8 @@
 
     .map-note { font-size: .85rem; color: rgba(0,0,0,.55); }
   </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
 
 <body>
@@ -117,32 +134,30 @@
 <nav class="navbar navbar-dark bg-dark fixed-top">
   <div class="container">
     <a class="navbar-brand fw-semibold d-flex align-items-center gap-2" href="#">
-      <img class="brand-icon"
-           src="https://raw.githubusercontent.com/peninsulastayco/peninsulastayco.github.io/main/images/22982f39-2c95-412f-81e9-39cc67ec4116.png"
-           alt="Peninsula Stay Co">
+      <img class="brand-icon" src="https://raw.githubusercontent.com/peninsulastayco/peninsulastayco.github.io/main/images/22982f39-2c95-412f-81e9-39cc67ec4116.png" alt="Peninsula Stay Co">
       Peninsula <span class="text-primary">Stay Co</span>
     </a>
+<div class="d-flex align-items-center gap-2">
+  <a href="https://www.facebook.com/people/Peninsula-Stay-Co/61586267940303/"
+     target="_blank"
+     rel="noopener"
+     class="btn btn-outline-light"
+     aria-label="Peninsula Stay Co on Facebook">
+    <i class="fa-brands fa-facebook-f"></i>
+  </a>
 
-    <div class="d-flex align-items-center gap-2">
-      <a href="https://www.facebook.com/people/Peninsula-Stay-Co/61586267940303/"
-         target="_blank"
-         rel="noopener"
-         class="btn btn-outline-light"
-         aria-label="Peninsula Stay Co on Facebook">
-        <i class="fa-brands fa-facebook-f"></i>
-      </a>
-
-      <a class="btn btn-primary" href="#quote">Get a quote</a>
-    </div>
+  <a class="btn btn-primary" href="#quote">Get a quote</a>
+</div>
   </div>
 </nav>
 
 <!-- HERO -->
-<header class="hero">
-  <div class="hero-bg" id="heroBg"></div>
+<header class="hero" id="top">
+  <div class="hero-bg" id="heroBg" aria-hidden="true"></div>
+
   <div class="container hero-content">
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-lg-8 hero-inner">
         <h1>Airbnb & Short-Stay Cleaning</h1>
         <h2>Mornington Peninsula</h2>
         <p>
@@ -158,8 +173,49 @@
   <div class="container">
     <h2 class="fw-bold mb-3">Pricing (guide)</h2>
     <p class="text-muted mb-4">
-      Indicative pricing based on common Mornington Peninsula turnovers.
+      Indicative pricing based on common Mornington Peninsula turnovers. Final pricing depends on bed/bath count, access, linen/restock needs and condition.
     </p>
+
+    <div class="row g-3">
+      <div class="col-md-3">
+        <div class="card p-3 h-100">
+          <h5>Studio / 1 Bed</h5>
+          <p class="display-6 fw-bold">$149</p>
+          <p class="text-muted mb-0">Per turnover</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-3 h-100 border-primary">
+          <h5>2 Bed</h5>
+          <p class="display-6 fw-bold">$199</p>
+          <p class="text-muted mb-0">Most popular</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-3 h-100">
+          <h5>3 Bed</h5>
+          <p class="display-6 fw-bold">$239</p>
+          <p class="text-muted mb-0">Per turnover</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-3 h-100">
+          <h5>4+ Bed / Luxe</h5>
+          <p class="display-6 fw-bold">From $299</p>
+          <p class="text-muted mb-0">Custom checklist</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <h3 class="h6 fw-semibold">Popular add-ons</h3>
+      <ul class="text-muted mb-0">
+        <li>Linen changeover (using your linen): <strong>$39</strong></li>
+        <li>Restock consumables (using your supplies): <strong>$25</strong></li>
+        <li>Same-day priority (when available): <strong>$25</strong></li>
+        <li>Inspection notes for host (damage / missing items): <strong>Included</strong></li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -174,11 +230,27 @@
         </p>
 
         <div class="d-flex flex-wrap gap-2" id="suburbList">
-          <button class="suburb-pill" data-suburb="Mornington VIC">Mornington</button>
-          <button class="suburb-pill" data-suburb="Rosebud VIC">Rosebud</button>
-          <button class="suburb-pill" data-suburb="Rye VIC">Rye</button>
-          <button class="suburb-pill" data-suburb="Sorrento VIC">Sorrento</button>
-          <button class="suburb-pill" data-suburb="Portsea VIC">Portsea</button>
+          <!-- Buttons: data-suburb controls map recentering -->
+          <button class="suburb-pill" type="button" data-suburb="Mornington VIC">Mornington</button>
+          <button class="suburb-pill" type="button" data-suburb="Mount Martha VIC">Mount Martha</button>
+          <button class="suburb-pill" type="button" data-suburb="Safety Beach VIC">Safety Beach</button>
+          <button class="suburb-pill" type="button" data-suburb="Dromana VIC">Dromana</button>
+          <button class="suburb-pill" type="button" data-suburb="McCrae VIC">McCrae</button>
+          <button class="suburb-pill" type="button" data-suburb="Rosebud VIC">Rosebud</button>
+          <button class="suburb-pill" type="button" data-suburb="Capel Sound VIC">Capel Sound</button>
+          <button class="suburb-pill" type="button" data-suburb="Rye VIC">Rye</button>
+          <button class="suburb-pill" type="button" data-suburb="St Andrews Beach VIC">St Andrews Beach</button>
+          <button class="suburb-pill" type="button" data-suburb="Blairgowrie VIC">Blairgowrie</button>
+          <button class="suburb-pill" type="button" data-suburb="Sorrento VIC">Sorrento</button>
+          <button class="suburb-pill" type="button" data-suburb="Portsea VIC">Portsea</button>
+          <button class="suburb-pill" type="button" data-suburb="Red Hill VIC">Red Hill</button>
+          <button class="suburb-pill" type="button" data-suburb="Flinders VIC">Flinders</button>
+          <button class="suburb-pill" type="button" data-suburb="Balnarring VIC">Balnarring</button>
+          <button class="suburb-pill" type="button" data-suburb="Somers VIC">Somers</button>
+          <button class="suburb-pill" type="button" data-suburb="Hastings VIC">Hastings</button>
+          <button class="suburb-pill" type="button" data-suburb="Bittern VIC">Bittern</button>
+          <button class="suburb-pill" type="button" data-suburb="Shoreham VIC">Shoreham</button>
+          <button class="suburb-pill" type="button" data-suburb="Point Leo VIC">Point Leo</button>
         </div>
       </div>
 
@@ -188,14 +260,16 @@
             <div class="ratio ratio-16x9 rounded overflow-hidden">
               <iframe
                 id="peninsulaMap"
+                title="Mornington Peninsula Map"
                 src="https://www.google.com/maps?q=Mornington+Peninsula+Victoria+Australia&output=embed"
                 loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
                 style="border:0;"
                 allowfullscreen>
               </iframe>
             </div>
-            <div class="map-note mt-2">
-              Map recentres based on suburb selection.
+            <div class="map-note mt-2 px-1">
+              Tip: clicking a suburb recentres the map to that location (embed maps can’t draw highlighted polygons without an API key).
             </div>
           </div>
         </div>
@@ -208,26 +282,53 @@
 <!-- QUOTE -->
 <section id="quote" class="py-5">
   <div class="container">
-    <h2 class="fw-bold mb-2">Request a quote</h2>
-    <p class="text-muted mb-3">
-      Email-based enquiries only.
-    </p>
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <h2 class="fw-bold mb-2">Request a quote</h2>
+        <p class="text-muted">
+          Email-based enquiries only. We’ll respond with availability and confirmed pricing.
+        </p>
+      </div>
 
-    <form action="https://formspree.io/f/mdakqwpv" method="POST" class="row g-3">
-      <input type="hidden" name="_subject" value="New Peninsula Stay Co Quote Request">
-      <div class="col-md-6">
-        <input class="form-control" name="Name" placeholder="Name" required>
+      <div class="col-lg-6">
+        <div class="card shadow-sm">
+          <div class="card-body p-4">
+            <form action="https://formspree.io/f/mdakqwpv" method="POST">
+              <input type="hidden" name="_subject" value="New Peninsula Stay Co Quote Request">
+              <input type="hidden" name="_redirect" value="https://peninsulastayco.com.au/?sent=1#quote">
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Name</label>
+                  <input class="form-control" name="Name" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Email</label>
+                  <input class="form-control" name="Email" type="email" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Phone (optional)</label>
+                  <input class="form-control" name="Phone">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Suburb</label>
+                  <input class="form-control" name="Suburb" required>
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Message</label>
+                  <textarea class="form-control" name="Message" rows="4"
+                    placeholder="Beds/baths, turnovers per week, linen/restock needs, checkout/check-in times…"></textarea>
+                </div>
+
+                <div class="col-12 d-grid">
+                  <button class="btn btn-primary btn-lg" type="submit">Send quote request</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-      <div class="col-md-6">
-        <input class="form-control" name="Email" type="email" placeholder="Email" required>
-      </div>
-      <div class="col-12">
-        <textarea class="form-control" name="Message" rows="4" placeholder="Tell us about your property…"></textarea>
-      </div>
-      <div class="col-12">
-        <button class="btn btn-primary btn-lg" type="submit">Send quote request</button>
-      </div>
-    </form>
+    </div>
   </div>
 </section>
 
@@ -240,40 +341,103 @@
 
 <a class="btn btn-primary btn-lg rounded-pill sticky-cta" href="#quote">Get a quote</a>
 
-<!-- SCRIPTS -->
+<!-- THANK YOU MODAL -->
+<div class="modal fade" id="thanksModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center p-4">
+        <h4 class="fw-bold">Thanks!</h4>
+        <p>Your request has been sent. We’ll be in touch shortly.</p>
+        <button class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-  // Parallax (iPhone safe)
+  // ===== THANK YOU MODAL =====
   (function () {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('sent') === '1') {
+      const modal = new bootstrap.Modal(document.getElementById('thanksModal'));
+      modal.show();
+      window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
+    }
+  })();
+
+  // ===== TRUE PARALLAX (iPhone-safe) =====
+  (function () {
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
     const hero = document.querySelector('.hero');
     const bg = document.getElementById('heroBg');
     if (!hero || !bg) return;
 
+    let ticking = false;
+
     function update() {
+      ticking = false;
+
       const rect = hero.getBoundingClientRect();
-      const vh = window.innerHeight;
+      const vh = window.innerHeight || 800;
+
+      // Only work while hero is on screen
       if (rect.bottom < 0 || rect.top > vh) return;
-      const progress = (vh - rect.top) / (vh + rect.height);
-      bg.style.transform = `translate3d(0, ${(progress - .5) * 60}px, 0)`;
+
+      // progress: 0 at top of viewport, 1 near end
+      const progress = Math.min(1, Math.max(0, (vh - rect.top) / (vh + rect.height)));
+
+      // max shift in px (tweak for more/less parallax)
+      const maxShift = 60;
+      const y = (progress - 0.5) * maxShift; // negative to positive
+      bg.style.transform = `translate3d(0, ${y}px, 0)`;
     }
-    window.addEventListener('scroll', () => requestAnimationFrame(update), { passive:true });
+
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
     update();
   })();
 
-  // Suburb -> map
+  // ===== SUBURB -> RECENTER MAP + ACTIVE PILL =====
   (function () {
     const map = document.getElementById('peninsulaMap');
     const list = document.getElementById('suburbList');
     if (!map || !list) return;
 
-    list.addEventListener('click', e => {
-      const btn = e.target.closest('.suburb-pill');
-      if (!btn) return;
+    function setActive(btn) {
       list.querySelectorAll('.suburb-pill').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      map.src = `https://www.google.com/maps?q=${encodeURIComponent(btn.dataset.suburb)}&output=embed`;
+    }
+
+    function updateMap(suburbText) {
+      const q = encodeURIComponent(`${suburbText} Mornington Peninsula Victoria Australia`);
+      map.src = `https://www.google.com/maps?q=${q}&output=embed`;
+    }
+
+    list.addEventListener('click', (e) => {
+      const btn = e.target.closest('.suburb-pill');
+      if (!btn) return;
+
+      const suburb = btn.getAttribute('data-suburb') || btn.textContent.trim();
+      setActive(btn);
+      updateMap(suburb);
     });
+
+    // Optional: default highlight Mornington
+    const first = list.querySelector('.suburb-pill');
+    if (first) {
+      setActive(first);
+    }
   })();
 </script>
 
